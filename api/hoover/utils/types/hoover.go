@@ -1,8 +1,12 @@
-package types
+package hoover_types
 
 import "fmt"
 
 type Position struct { X int; Y int }
+
+func MakePosition(position [2]int) Position {
+	return Position{ X: position[0], Y: position[1] }
+}
 
 type Hoover struct
 {
@@ -25,7 +29,7 @@ func (self *Hoover) Advance(instruction byte) error {
 	case 'E': { self.Position.X += 1; break }
 	case 'W': { self.Position.X -= 1; break }
 	default: {
-		return fmt.Errorf("UNKNOWN_INSTRUCTION_RECEIVED")
+		return fmt.Errorf("HOOVER_RECEIVED_UNKNOWN_INSTRUCTION")
 	}
 	}
 
