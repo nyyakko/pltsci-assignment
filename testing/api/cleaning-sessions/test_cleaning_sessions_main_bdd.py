@@ -20,4 +20,5 @@ def then_the_response_code_should_be(response, code):
 
 @step(parsers.parse("the response content should be:"))
 def and_the_response_body_should_be(response, docstring):
+    assert response.text.strip() == docstring.strip()
     pass
