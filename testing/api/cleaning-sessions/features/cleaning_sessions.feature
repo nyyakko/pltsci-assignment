@@ -37,3 +37,16 @@ Feature: Cleaning Sessions
             """
             {"coords":[2,2],"patches":1}
             """
+
+    Scenario: Do not clean the same patch twice
+        When I send "POST" request with body to "/v1/cleaning-sessions":
+            """
+            {"roomSize":[5,5],"coords":[2,2],"patches":[[2,2]],"instructions":"NS"}
+            """
+
+        Then the response status code should be 200
+
+        And the response content should be:
+            """
+            {"coords":[2,2],"patches":1}
+            """
