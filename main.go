@@ -10,6 +10,7 @@ import (
 )
 
 func checkHealth(w http.ResponseWriter, r *http.Request) *http_utils.HttpError {
+	w.Header().Set("Content-Type", "application/json")
 	encoder := json.NewEncoder(w)
 	encoder.Encode(struct { Status string `json:"status"` }{ Status: "ok" })
 	return nil
