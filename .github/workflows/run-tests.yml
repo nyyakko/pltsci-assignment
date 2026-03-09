@@ -1,0 +1,46 @@
+name: run tests
+
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: set up go
+        uses: actions/setup-go@v6
+        with:
+          go-version: '1.25.5'
+
+      - name: set up python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.14'
+
+      - name: start server
+        run: go run .
+        shell: bash
+      - name: wait for server
+        run: |
+          for i in {1..30}; do
+            if curl -s http://localhost:8080/v1/health > /dev/null; then
+              echo "server is ready!"
+              exit 0
+            fi
+            echo "waiting for server... ($i/30)"
+            sleep 1
+          done
+          echo "server failed to start"
+          exit 1
+
+      - name: install python deps
+        run: pip install -r requirements.txt
+
+      - name: run pytest
+        run: pytest -v
+
+      - name: stop server
+        if: always()
+        run: pkill -f "go run"
