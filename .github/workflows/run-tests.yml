@@ -8,6 +8,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
       - name: set up go
         uses: actions/setup-go@v6
         with:
@@ -18,13 +20,8 @@ jobs:
         with:
           python-version: '3.14'
 
-      - name: debug
-        run: |
-          pwd
-          ls -la ..
-
       - name: start server
-        run: go run . > server.log 2>&1 &
+        run: go run .
 
       - name: wait for server
         run: |
