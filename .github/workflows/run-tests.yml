@@ -19,11 +19,8 @@ jobs:
         with:
           python-version: '3.14'
 
-      - name: show files
-        run: ls
-
       - name: start server
-        run: go run .
+        run: go run . > server.log 2>&1 &
 
       - name: wait for server
         run: |
