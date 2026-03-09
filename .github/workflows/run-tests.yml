@@ -33,6 +33,7 @@ jobs:
             sleep 1
           done
           echo "server failed to start"
+          cat server.log
           exit 1
 
       - name: install python deps
