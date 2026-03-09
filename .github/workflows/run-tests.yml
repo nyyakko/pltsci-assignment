@@ -20,8 +20,11 @@ jobs:
         with:
           python-version: '3.14'
 
+      - name: build docker image
+        run: docker build -t . pltsci-assignment-test-server .
+
       - name: start server
-        run: go run .
+        run: docker run --rm -d -p 8080:8080 --name server pltsci-assignment-test-server
 
       - name: wait for server
         run: |
@@ -34,7 +37,7 @@ jobs:
             sleep 1
           done
           echo "server failed to start"
-          cat server.log
+          docker logs server
           exit 1
 
       - name: install python deps
@@ -45,4 +48,4 @@ jobs:
 
       - name: stop server
         if: always()
-        run: pkill -f "go run"
+        run: docker stop server
