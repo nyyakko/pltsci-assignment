@@ -21,7 +21,7 @@ jobs:
       - name: debug
         run: |
           pwd
-          ls -la
+          ls -la ..
 
       - name: start server
         run: go run . > server.log 2>&1 &
