@@ -23,7 +23,7 @@ jobs:
           DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
         with:
           username: $DOCKERHUB_USERNAME
-          password: $DOCKERHUB_TOKEN
+          password: $DOCKERHUB_PASSWORD
 
       - name: build and push
         uses: docker/build-push-action@v6
