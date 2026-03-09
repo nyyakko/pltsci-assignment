@@ -24,7 +24,7 @@ jobs:
 
       - name: wait for server
         run: |
-          for i in {1..30}; do
+          for i in {1..5}; do
             if curl -s http://localhost:8080/v1/health > /dev/null; then
               echo "server is ready!"
               exit 0
