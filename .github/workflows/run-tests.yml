@@ -21,7 +21,7 @@ jobs:
           python-version: '3.14'
 
       - name: build docker image
-        run: docker build -t . pltsci-assignment-test-server .
+        run: docker build -t pltsci-assignment-test-server .
 
       - name: start server
         run: docker run --rm -d -p 8080:8080 --name server pltsci-assignment-test-server
