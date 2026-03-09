@@ -20,8 +20,10 @@ jobs:
           python-version: '3.14'
 
       - name: start server
-        run: ls && go run .
-        shell: bash
+        run:
+          ls |
+          go run .
+
       - name: wait for server
         run: |
           for i in {1..30}; do
