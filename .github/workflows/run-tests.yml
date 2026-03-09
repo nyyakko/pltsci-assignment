@@ -20,7 +20,7 @@ jobs:
           python-version: '3.14'
 
       - name: start server
-        run: go run .
+        run: ls && go run .
         shell: bash
       - name: wait for server
         run: |
