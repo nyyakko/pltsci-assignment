@@ -19,10 +19,11 @@ jobs:
         with:
           python-version: '3.14'
 
+      - name: show files
+        run: ls
+
       - name: start server
-        run:
-          ls |
-          go run .
+        run: go run .
 
       - name: wait for server
         run: |
